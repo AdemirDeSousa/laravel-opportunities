@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api-sellers' => [
+            'driver' => 'jwt',
+            'provider' => 'sellers',
+        ],
     ],
 
     /*
@@ -60,15 +65,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'sellers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => \App\Models\Seller\Seller::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'users' => [
+             'driver' => 'database',
+             'table' => 'users',
+         ],
     ],
 
     /*
@@ -87,6 +92,13 @@ return [
     */
 
     'passwords' => [
+        'sellers' => [
+            'provider' => 'sellers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

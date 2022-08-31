@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -43,8 +44,14 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (AuthenticationException $e, $request) {
+            return response()->json([
+                'message' => 'Invalid token'
+            ], 401);
+        });
+
         $this->reportable(function (Throwable $e) {
-            //
+
         });
     }
 }
