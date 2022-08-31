@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\AuthTeste;
+namespace Tests\Feature\AuthTest;
 
 use App\Models\Seller\Seller;
 use Symfony\Component\HttpFoundation\Response;

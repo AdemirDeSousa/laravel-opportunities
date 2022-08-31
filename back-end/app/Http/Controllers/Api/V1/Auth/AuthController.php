@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    private $sellerService;
+    private SellerService $sellerService;
 
     public function __construct(SellerService $sellerService)
     {
