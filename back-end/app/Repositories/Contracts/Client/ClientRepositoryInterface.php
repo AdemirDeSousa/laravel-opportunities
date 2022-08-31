@@ -10,4 +10,6 @@ interface ClientRepositoryInterface
     public function getClients(): Collection;
 
     public function storeClient(array $data): Client;
+
+    public function verifyClientExists(int $clientId): void;
 }

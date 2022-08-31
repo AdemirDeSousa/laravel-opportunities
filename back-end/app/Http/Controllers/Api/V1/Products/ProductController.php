@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Product\StoreProductRequest;
 use App\Services\Product\ProductService;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
@@ -29,7 +30,7 @@ class ProductController extends Controller
 
             return response()->json([
                 'message' => 'Produto criado com sucesso'
-            ], 201);
+            ], Response::HTTP_CREATED);
 
         } catch (\Exception $e) {
 
@@ -37,7 +38,7 @@ class ProductController extends Controller
 
             return response()->json([
                 'message' => 'Falha ao cadastrar produto'
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
     }

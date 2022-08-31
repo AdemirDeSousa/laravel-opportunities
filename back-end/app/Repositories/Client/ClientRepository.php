@@ -3,9 +3,9 @@
 namespace App\Repositories\Client;
 
 use App\Models\Client\Client;
-use App\Models\Product\Product;
 use App\Repositories\Contracts\Client\ClientRepositoryInterface;
 use Illuminate\Support\Collection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -27,5 +27,12 @@ class ClientRepository implements ClientRepositoryInterface
             'name' => $data['name'],
             'email' => $data['email'],
         ]);
+    }
+
+    public function verifyClientExists(int $clientId): void
+    {
+        if(!$client = Client::query()->find($clientId)){
+            throw new NotFoundHttpException('Cliente não encontrado');
+        }
     }
 }

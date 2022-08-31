@@ -18,8 +18,6 @@ class SellerLoginTest extends TestCase
             'password' => 'password'
         ];
 
-//        $this->actingAs($seller, 'api-sellers');
-
         $this->postJson(route('api.auth.login'), $payload)
             ->assertJsonStructure([
                 'access_token'

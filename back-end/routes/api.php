@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Clients\ClientController;
+use App\Http\Controllers\Api\V1\Opportunities\OpportunityController;
 use App\Http\Controllers\Api\V1\Products\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,13 @@ Route::group(['middleware' => 'auth:api-sellers'], function (){
     Route::prefix('/products')->name('products.')->group(function (){
         Route::get('', [ProductController::class, 'index'])->name('index');
         Route::post('', [ProductController::class, 'store'])->name('store');
+    });
+
+    /**
+     * Opportunities
+     */
+    Route::prefix('/opportunities')->name('opportunities.')->group(function (){
+        Route::get('', [OpportunityController::class, 'index'])->name('index');
+        Route::post('', [OpportunityController::class, 'store'])->name('store');
     });
 });

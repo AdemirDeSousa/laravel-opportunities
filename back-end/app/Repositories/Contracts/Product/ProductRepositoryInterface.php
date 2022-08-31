@@ -10,4 +10,6 @@ interface ProductRepositoryInterface
     public function getProducts(): Collection;
 
     public function storeProduct(array $data): Product;
+
+    public function verifyProductExists(int $productId): void;
 }
