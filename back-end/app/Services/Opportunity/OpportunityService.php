@@ -2,13 +2,11 @@
 
 namespace App\Services\Opportunity;
 
-use App\Models\Client\Client;
-use App\Models\Product\Product;
+use App\Http\Resources\Opportunity\OpportunitiesResource;
 use App\Models\Seller\Seller;
 use App\Repositories\Contracts\Client\ClientRepositoryInterface;
 use App\Repositories\Contracts\Opportunity\OpportunityRepositoryInterface;
 use App\Repositories\Contracts\Product\ProductRepositoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OpportunityService
 {
@@ -24,6 +22,11 @@ class OpportunityService
         $this->opportunityRepo = $opportunityRepo;
         $this->clientRepository = $clientRepository;
         $this->productRepository = $productRepository;
+    }
+
+    public function index()
+    {
+        return OpportunitiesResource::collection($this->opportunityRepo->getOpportunities());
     }
 
     public function store(array $data): void

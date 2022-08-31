@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Opportunity;
 
+use App\Http\Resources\Opportunity\OpportunitiesResource;
 use App\Models\Opportunity\Opportunity;
 use App\Repositories\Contracts\Opportunity\OpportunityRepositoryInterface;
+use Illuminate\Support\Collection;
 
 class OpportunityRepository implements OpportunityRepositoryInterface
 {
@@ -22,5 +24,10 @@ class OpportunityRepository implements OpportunityRepositoryInterface
             'product_id' => $data['product_id'],
             'seller_id'  => $sellerId,
         ]);
+    }
+
+    public function getOpportunities(): Collection
+    {
+        return $this->entity->query()->get();
     }
 }

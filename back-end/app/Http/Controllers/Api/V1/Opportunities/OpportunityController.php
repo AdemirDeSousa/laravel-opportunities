@@ -19,6 +19,11 @@ class OpportunityController
         $this->opportunityService = $opportunityService;
     }
 
+    public function index()
+    {
+        return $this->opportunityService->index();
+    }
+
     public function store(StoreOpportunityRequest $request)
     {
         try {
