@@ -43,7 +43,7 @@ class ShowOpportunityTest extends TestCase
                     'title' => 'Oportunidade de Testes',
                     'client_id' => 1,
                     'product_id' => 1,
-                    'status' => false
+                    'status' => 1
                 ]
             ]);
 

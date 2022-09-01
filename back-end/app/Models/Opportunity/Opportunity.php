@@ -20,10 +20,6 @@ class Opportunity extends Model
         'seller_id'
     ];
 
-    protected $casts = [
-        'status' => 'boolean'
-    ];
-
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
@@ -37,5 +33,22 @@ class Opportunity extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function getStatusNameAttribute()
+    {
+        switch ($this->status):
+            case 1:
+                $status = 'Pendente';
+                break;
+            case 2:
+                $status = 'Aprovado';
+                break;
+            case 3:
+                $status = 'Resucaso';
+                break;
+        endswitch;
+
+        return $status ?? 'Pendente';
     }
 }

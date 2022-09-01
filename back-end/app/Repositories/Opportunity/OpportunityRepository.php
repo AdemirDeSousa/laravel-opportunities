@@ -45,6 +45,7 @@ class OpportunityRepository implements OpportunityRepositoryInterface
             'title' => $data['title'],
             'client_id' => $data['client_id'],
             'product_id' => $data['product_id'],
+            'status' => $data['status'],
         ]);
     }
 
@@ -52,10 +53,12 @@ class OpportunityRepository implements OpportunityRepositoryInterface
     {
         $query = $this->entity;
 
-        if($request->filled('title')){
-            $query = $query->where('title', $request->title);
+        if($request->filled('seller_name')){
+            $query = $query->whereHas('seller', function ($q) use ($request){
+                $q->where('name', 'LIKE', '%' . $request->seller_name . '%');
+            });
         }
 
-        return $query->get();
+        return $query->latest()->get();
     }
 }

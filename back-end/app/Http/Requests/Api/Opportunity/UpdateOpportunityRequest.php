@@ -13,7 +13,8 @@ class UpdateOpportunityRequest extends BaseApiRequest
         return [
             'title' => 'required',
             'client_id' => 'required',
-            'product_id' => 'required'
+            'product_id' => 'required',
+            'status' => 'required|in:1,2,3'
         ];
     }
 }

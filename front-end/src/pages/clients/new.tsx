@@ -6,21 +6,22 @@ import Header from "../../components/Header";
 
 import { http } from "../../axios/request";
 
-const NewProduct = () => {
+const NewClient = () => {
   const router = useRouter();
 
   const formInitialValues = {
-    title: "",
+    name: "",
+    email: "",
   };
 
   const formOnSubmit = async (data: any) => {
     await http
-      .post("/products", data)
+      .post("/clients", data)
       .then(() => {
         console.log("sucesso");
 
         setTimeout(() => {
-          router.push("/products");
+          router.push("/clients");
         }, 2000);
       })
 
@@ -33,6 +34,7 @@ const NewProduct = () => {
     <>
       <Middleware>
         <Header />
+
         <Container className="mt-5">
           <Row className="justify-content-md-center">
             <Col lg={8}>
@@ -40,8 +42,13 @@ const NewProduct = () => {
                 <Form>
                   <div>
                     <div>
-                      <label htmlFor="title">Nome do Produto</label>
-                      <Field id="title" name="title" />
+                      <label htmlFor="name">Nome</label>
+                      <Field id="name" name="name" />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email">Email</label>
+                      <Field id="email" name="email" />
                     </div>
 
                     <button type="submit">Enviar</button>
@@ -56,4 +63,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default NewClient;

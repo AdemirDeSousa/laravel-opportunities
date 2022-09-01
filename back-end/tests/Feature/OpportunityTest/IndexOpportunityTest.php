@@ -39,11 +39,13 @@ class IndexOpportunityTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     [
+                        'id',
                         'title',
                         'seller',
                         'client',
                         'product',
-                        'status'
+                        'status',
+                        'created_at'
                     ]
                 ]
             ]);

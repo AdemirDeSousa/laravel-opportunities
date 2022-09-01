@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('opportunities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->boolean('status')->default(false);
+            $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('client_id')->index()->nullable();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedBigInteger('product_id')->index()->nullable();

@@ -38,6 +38,7 @@ class UpdateOpportunityTest extends TestCase
             'title' => 'Oportunidade editada',
             'client_id' => 2,
             'product_id' => 2,
+            'status' => 2
         ];
 
         $this->putJson(route('api.opportunities.update', ['id' => $opportunity->id]), $payload)
@@ -50,6 +51,7 @@ class UpdateOpportunityTest extends TestCase
             'title' => 'Oportunidade editada',
             'client_id' => 2,
             'product_id' => 2,
+            'status' => 2
         ]);
     }
 
@@ -69,6 +71,9 @@ class UpdateOpportunityTest extends TestCase
                     'product_id' => [
                         __('validation.required', ['attribute' => 'product id'])
                     ],
+                    'status' => [
+                        __('validation.required', ['attribute' => 'status'])
+                    ],
                 ]
             ]);
     }
@@ -83,6 +88,7 @@ class UpdateOpportunityTest extends TestCase
             'title' => 'Oportunidade editada',
             'client_id' => 1,
             'product_id' => 1,
+            'status' => 1
         ];
 
         $this->putJson(route('api.opportunities.update', ['id' => 123]), $payload)

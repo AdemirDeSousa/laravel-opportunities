@@ -25,11 +25,11 @@ const Opportunities = () => {
   }, [filters]);
 
   const filtersInitialValues = {
-    title: "",
+    seller_name: "",
   };
 
-  const filtersOnSubmit = async (data: { title: string }) => {
-    setFilters(`?title=${data.title}`);
+  const filtersOnSubmit = async (data: { seller_name: string }) => {
+    setFilters(`?seller_name=${data.seller_name}`);
   };
 
   return (
@@ -48,15 +48,18 @@ const Opportunities = () => {
                   <Form className="d-flex gap-4 mb-5">
                     <Field
                       className="w-50"
-                      placeholder="Nome da Oportunidade"
-                      id="title"
-                      name="title"
+                      placeholder="Nome do Vendedor"
+                      id="seller_name"
+                      name="seller_name"
                     />
-
                     <Button type="submit">Buscar</Button>
                   </Form>
                 )}
               </Formik>
+
+              <Link href={"/opportunities/new"} className="mb-5">
+                <Button variant="success">Cadastrar</Button>
+              </Link>
 
               <Table striped bordered hover size="sm">
                 <thead>
@@ -65,6 +68,8 @@ const Opportunities = () => {
                     <th>Vendedor</th>
                     <th>Cliente</th>
                     <th>Produto</th>
+                    <th>Status</th>
+                    <th>Criação</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
@@ -75,6 +80,8 @@ const Opportunities = () => {
                       <td>{item.seller}</td>
                       <td>{item.client}</td>
                       <td>{item.product}</td>
+                      <td>{item.status}</td>
+                      <td>{item.created_at}</td>
                       <td>
                         <Link href={`/opportunities/${item.id}`}>
                           <Button variant="link">Atualizar</Button>

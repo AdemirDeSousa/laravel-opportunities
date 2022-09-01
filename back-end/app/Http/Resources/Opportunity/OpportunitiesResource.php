@@ -20,7 +20,8 @@ class OpportunitiesResource extends JsonResource
             'client' => $this->client->name,
             'seller' => $this->seller->name,
             'product' => $this->product->title,
-            'status' => $this->status
+            'status' => $this->statusName,
+            'created_at' => $this->created_at->format('d/m/Y')
         ];
     }
 }

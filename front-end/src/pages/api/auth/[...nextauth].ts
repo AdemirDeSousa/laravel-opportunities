@@ -40,13 +40,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  pages: {
-    // signIn: '/auth/login'
-    // signOut: '/auth/logout',
-    // error: '/auth/error',
-    // verifyRequest: '/auth/verify-request',
-    // newUser: '/auth/new-user'
-  },
+  pages: {},
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",

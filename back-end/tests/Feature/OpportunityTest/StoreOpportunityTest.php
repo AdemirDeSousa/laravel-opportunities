@@ -42,7 +42,7 @@ class StoreOpportunityTest extends TestCase
             'client_id' => 1,
             'product_id' => 1,
             'seller_id' => auth('api-sellers')->user()->id,
-            'status' => 0
+            'status' => 1
         ]);
     }
 
