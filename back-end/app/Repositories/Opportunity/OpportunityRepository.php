@@ -2,10 +2,11 @@
 
 namespace App\Repositories\Opportunity;
 
-use App\Http\Resources\Opportunity\OpportunitiesResource;
 use App\Models\Opportunity\Opportunity;
 use App\Repositories\Contracts\Opportunity\OpportunityRepositoryInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OpportunityRepository implements OpportunityRepositoryInterface
 {
@@ -15,6 +16,16 @@ class OpportunityRepository implements OpportunityRepositoryInterface
     {
         $this->entity = $opportunities;
     }
+
+    public function findByIdOrFail(int $id): Opportunity
+    {
+        if(!$opportunity = $this->entity->find($id)){
+            throw new NotFoundHttpException('Oportunidade não encontrada');
+        }
+
+        return $opportunity;
+    }
+
 
     public function storeOpportunity(array $data, int $sellerId): Opportunity
     {
@@ -26,8 +37,25 @@ class OpportunityRepository implements OpportunityRepositoryInterface
         ]);
     }
 
-    public function getOpportunities(): Collection
+    public function update(int $id, array $data): void
     {
-        return $this->entity->query()->get();
+        $opportunity = $this->findByIdOrFail($id);
+
+        $opportunity->update([
+            'title' => $data['title'],
+            'client_id' => $data['client_id'],
+            'product_id' => $data['product_id'],
+        ]);
+    }
+
+    public function getOpportunities(Request $request): Collection
+    {
+        $query = $this->entity;
+
+        if($request->filled('title')){
+            $query = $query->where('title', $request->title);
+        }
+
+        return $query->get();
     }
 }

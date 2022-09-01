@@ -22,6 +22,11 @@ class ProductController extends Controller
         return $this->productService->index();
     }
 
+    public function selectProductOptions()
+    {
+        return $this->productService->selectOptions();
+    }
+
     public function store(StoreProductRequest $request)
     {
         try {

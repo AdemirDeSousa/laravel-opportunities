@@ -22,6 +22,11 @@ class ClientController extends Controller
         return $this->clientService->index();
     }
 
+    public function selectClientOptions()
+    {
+        return $this->clientService->selectOptions();
+    }
+
     public function store(StoreClientRequest $request)
     {
         try {

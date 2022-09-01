@@ -2,6 +2,7 @@
 
 namespace App\Services\Client;
 
+use App\Http\Resources\Client\ClientOptionsResource;
 use App\Http\Resources\Client\ClientsResource;
 use App\Repositories\Contracts\Client\ClientRepositoryInterface;
 
@@ -17,6 +18,11 @@ class ClientService
     public function index()
     {
         return ClientsResource::collection($this->clientRepo->getClients());
+    }
+
+    public function selectOptions()
+    {
+        return ClientOptionsResource::collection($this->clientRepo->getClients());
     }
 
     public function store(array $data): void

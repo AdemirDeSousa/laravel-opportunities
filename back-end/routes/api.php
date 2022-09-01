@@ -38,5 +38,15 @@ Route::group(['middleware' => 'auth:api-sellers'], function (){
     Route::prefix('/opportunities')->name('opportunities.')->group(function (){
         Route::get('', [OpportunityController::class, 'index'])->name('index');
         Route::post('', [OpportunityController::class, 'store'])->name('store');
+        Route::get('/{id}', [OpportunityController::class, 'show'])->name('show');
+        Route::put('/{id}', [OpportunityController::class, 'update'])->name('update');
+    });
+
+    /**
+     * Select Field
+     */
+    Route::prefix('/select-options')->name('select-options.')->group(function (){
+        Route::get('/clients', [ClientController::class, 'selectClientOptions'])->name('clients');
+        Route::get('/products', [ProductController::class, 'selectProductOptions'])->name('products');
     });
 });

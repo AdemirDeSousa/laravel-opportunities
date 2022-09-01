@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { useRouter } from 'next/router'
 
@@ -8,6 +9,28 @@ const NewOpportunity = () => {
     
   const router = useRouter()
 
+  const [clients, setClients] = useState() as any
+  const [products, setProducts] = useState() as any
+
+  const getClients = async () => {
+    const response = await http.get('/select-options/clients')
+
+    setClients(response.data.data)
+
+  }
+
+  const getProducts = async () => {
+    const response = await http.get('/select-options/products')
+
+    setProducts(response.data.data)
+
+  }
+
+  useEffect(() => {
+    getClients()
+    getProducts()
+  }, [])
+  
   const formInitialValues = {
     title: '',
     client_id: '',
@@ -21,7 +44,7 @@ const NewOpportunity = () => {
         console.log('sucesso')
 
         setTimeout(() => {
-          router.push('/products')
+          router.push('/opportunities')
         }, 2000)
       })
 
@@ -40,7 +63,7 @@ const NewOpportunity = () => {
           <Form>
               <div>  
                 <div>
-                    <label htmlFor="title">Nome do Produto</label>
+                    <label htmlFor="title">Nome da Oportunidade</label>
                     <Field id="title" name="title" />
                 </div>
 
@@ -49,16 +72,24 @@ const NewOpportunity = () => {
                   <label>Clientes</label>
                   <Field as="select" name="client_id" placeholder="Selecione">
                     <option value="">Selecione</option>
-                    {categories?.map(item => (
-                      <option key={item.value} value={item.value}>
-                        {item.label}
+                    {clients?.map(item => (
+                      <option key={item.key} value={item.key}>
+                        {item.value}
                       </option>
                     ))}
                   </Field>
-                  {errors.category_id && touched.category_id && (
-                    <S.ErrorMsg>{errors.category_id}</S.ErrorMsg>
-                  )}
-               
+                </div>
+
+                <div>
+                  <label>Produtos</label>
+                  <Field as="select" name="product_id" placeholder="Selecione">
+                    <option value="">Selecione</option>
+                    {products?.map(item => (
+                      <option key={item.key} value={item.key}>
+                        {item.value}
+                      </option>
+                    ))}
+                  </Field>
                 </div>
             
                 <button type='submit'>Enviar</button>

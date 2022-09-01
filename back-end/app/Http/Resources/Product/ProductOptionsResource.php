@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Opportunity;
+namespace App\Http\Resources\Product;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OpportunitiesResource extends JsonResource
+class ProductOptionsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,8 @@ class OpportunitiesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'client' => $this->client->name,
-            'seller' => $this->seller->name,
-            'product' => $this->product->title,
-            'status' => $this->status
+            'key' => $this->id,
+            'value' => $this->title
         ];
     }
 }
